@@ -1,0 +1,60 @@
+{
+    "elements": [
+        {
+            "name": "Jenkins",
+            "symbol": "JNK",
+            "number": 1,
+            "pricing": "Open Source",
+            "pricing_symbol": "Os"
+        },
+        {
+            "name": "Docker",
+            "symbol": "DCK",
+            "number": 2,
+            "pricing": "Freemium",
+            "pricing_symbol": "Fm"
+        },
+        {
+            "name": "Kubernetes",
+            "symbol": "K8S",
+            "number": 3,
+            "pricing": "Open Source",
+            "pricing_symbol": "Os"
+        },
+        {
+            "name": "SonarQube",
+            "symbol": "SQB",
+            "number": 4,
+            "pricing": "Paid",
+            "pricing_symbol": "Pd"
+        },
+        {
+            "name": "Terraform",
+            "symbol": "TRF",
+            "number": 5,
+            "pricing": "Open Source",
+            "pricing_symbol": "Os"
+        },
+        {
+            "name": "AWS CloudFormation",
+            "symbol": "AWSCF",
+            "number": 6,
+            "pricing": "Enterprise",
+            "pricing_symbol": "En"
+        },
+        {
+            "name": "GitLab",
+            "symbol": "GTLB",
+            "number": 7,
+            "pricing": "Freemium",
+            "pricing_symbol": "Fm"
+        },
+        {
+            "name": "Prometheus",
+            "symbol": "PROM",
+            "number": 8,
+            "pricing": "Open Source",
+            "pricing_symbol": "Os"
+        }
+    ]
+}
