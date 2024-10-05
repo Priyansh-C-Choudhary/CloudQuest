@@ -1,6 +1,7 @@
 import React from "react";
 import './styles/App.css';
 import DevOpsTable from './components/DevOpsTable';
+import CloudTable from './components/cloudtable.js';
 
 function App() {
   return (
