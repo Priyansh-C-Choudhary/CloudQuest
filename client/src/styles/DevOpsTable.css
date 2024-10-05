@@ -2,4 +2,8 @@
   display: grid;
     grid-template-columns: repeat(18, 64px);
     grid-template-rows: repeat(7, 64px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }

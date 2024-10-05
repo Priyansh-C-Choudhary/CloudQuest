@@ -1,11 +1,16 @@
 {
     "elements": [
         {
-            "name": "Jenkins",
-            "symbol": "JNK",
+            "name": "GitLab",
+            "symbol" : "Gl",
             "number": 1,
             "pricing": "Open Source",
-            "pricing_symbol": "Os"
+            "pricing_symbol": "Os",
+            "xpos": 1,
+            "ypos": 1,
+            "wxpos": 1,
+            "wypos": 1,
+            "category": "Source Code Management"
         },
         {
             "name": "Docker",
