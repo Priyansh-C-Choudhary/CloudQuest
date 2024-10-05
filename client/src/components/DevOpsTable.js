@@ -6,7 +6,10 @@ const DevOpsTable = () => {
     return (
         <div className="devops-table">
             {data.elements.map((element) => (
-                <div key={element.name}>{element.symbol}</div>
+                <div key={element.name} style={{
+                    gridColumn: element.xpos,
+                    gridRow: element.ypos,
+                }}>{element.symbol}</div>
             ))}
         </div>
     );
