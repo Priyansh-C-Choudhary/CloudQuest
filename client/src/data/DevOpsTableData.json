@@ -10,7 +10,7 @@
             "ypos": 1,
             "wxpos": 1,
             "wypos": 1,
-            "category":"Source Control Management "
+            "category":"Source Control Management"
         },
         {
             "name": "Splunk",
@@ -34,7 +34,7 @@
             "ypos": 2,
             "wxpos": 1,
             "wypos": 2,
-            "category":"Source Control Management "
+            "category":"Source Control Management"
         },
         {
             "name": "Datical",
@@ -130,7 +130,7 @@
             "ypos": 3,
             "wxpos": 1,
             "wypos": 3,
-             "category":"Source Control Management "
+             "category":"Source Control Management"
         },
         {
             "name": "DBMaestro",
@@ -226,7 +226,7 @@
             "ypos": 4,
             "wxpos": 1,
             "wypos": 4,
-             "category":"Source Control Management "
+             "category":"Source Control Management"
         },
         {
             "name": "Delphix",
@@ -442,7 +442,7 @@
             "ypos": 5,
             "wxpos": 1,
             "wypos": 5,
-             "category":"Source Control Management "
+             "category":"Source Control Management"
         },
         {
             "name": "Redgate",
@@ -658,7 +658,7 @@
             "ypos": 6,
             "wxpos": 1,
             "wypos": 6,
-             "category":"Source Control Management "
+             "category":"Source Control Management"
         },
         {
             "name": "Flyway",
@@ -874,7 +874,7 @@
             "ypos": 6,
             "wxpos": 19,
             "wypos": 6,
-             "category":"Source Control Management "
+             "category":"Source Control Management"
         },
         {
             "name": "Perforce",
@@ -886,7 +886,7 @@
             "ypos": 6,
             "wxpos": 20,
             "wypos": 6,
-             "category":"Source Control Management "
+             "category":"Source Control Management"
         },
         {
             "name": "Circle CI",

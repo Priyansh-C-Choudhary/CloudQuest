@@ -1,36 +1,46 @@
 import React from 'react';
 import '../styles/DevOpsTable.css';
-import data from '../data/sampledata.json';
+import data from '../data/DevOpsTableData.json';
 
-const colorMap = {
-    "noble gas": "#FFBC42",
-    "alkaline earth metal": "#EC674E",
-    "diatomic nonmetal": "#D81159",
-    "alkali metal": "#8F2D56",
-    "transition metal": "#58586B",
-    "post-transition metal": "#218380",
-    lanthanide: "#4AABAF",
-    metalloid: "#73D2DE",
-  };
+const devopscolorMap = {
+    "Source Control Management": "#812E58",
+    "Database Automation": "#F16932",
+    "Continuous Integration": "#4DA9D4",
+    "Testing": "#A74233",
+    "Configuration": "#1F4D7D",
+    "Deployment": "#54B288",
+    "Containers": "#434B4E",
+    "Release Orchestration": "#499FC9",
+    "Cloud": "#FCC137",
+    "AIOps": "#CB6D31",
+    "Analytics": "#4D8C7B",
+    "Monitoring": "#444E55",
+    "Security": "#1A87A9",
+    "Collaboration": "#8D2B63"
+};
 
 const DevOpsTable = () => {
     return (
-        <div className="devops-table">
-            {data.elements.map((element) => (
-                <div 
-                className="element"
-                key={element.name} 
-                style={{
-                    gridColumn: element.xpos,
-                    gridRow: element.ypos,
-                    borderColor: colorMap[element.category],
-                }}
-            >
-                <strong>{element.symbol}</strong>
-                <small className="number">{element.number}</small>
-                <small className="name">{element.name}</small>
+        <div className="devops-container">
+            <h1 className="heading">Periodic Table of DevOps Tools</h1>
+            <div className="devops-table">
+                {data.elements.map((element) => (
+                    <div 
+                        className="element"
+                        key={element.name} 
+                        style={{
+                            gridColumn: element.xpos,
+                            gridRow: element.ypos,
+                            borderColor: devopscolorMap[element.category],
+                        }}
+                    >
+                        <strong>{element.symbol}</strong>
+                        <small className="number">{element.number}</small>
+                        <small className="pricing">{element.pricing_symbol}</small>
+                        <small className="name">{element.name}</small>
+                    </div>
+                ))}
             </div>
-        ))}
         </div>
     );
 };
