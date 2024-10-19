@@ -10,7 +10,7 @@ import { useContext } from 'react';
 import NavStateContext from '../context/NavStateContext';
 import CurrentViewContext from '../context/CurrentViewContext';
 import ForgetPasswordContainer from '../components/forgetPassword/ForgetPasswordContainer';
-import ViewMostPopular from '../components/ViewMostPopular/ViewMostPopular';
+
 const GuestPage = () => {
     const { navIdx } = useContext(NavStateContext);
     const { view } = useContext(CurrentViewContext);
@@ -19,16 +19,11 @@ const GuestPage = () => {
             <Layout>
                 <LandingPage visible={navIdx === 0} />
                 <Features visible={navIdx === 0} />
-                <Homepage visible={navIdx === 1} />
-                <Pricing visible={navIdx === 2} />
-                <ContactUs visible={navIdx === 4} />
                 <Login visible={navIdx === 5} />
                 <Signup visible={navIdx === 6} />
                 <ForgetPasswordContainer visible={navIdx === 7} />
-                <ViewMostPopular visible={navIdx === 1024} />
             </Layout>
-
         )
 }
 
-export default GuestPage
+export default GuestPage;

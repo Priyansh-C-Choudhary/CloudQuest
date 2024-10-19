@@ -19,9 +19,6 @@ const ClientPage = () => {
         <Layout>
             <LandingPage visible={navIdx === 0} />
             <Features visible={navIdx === 0} />
-            <Homepage visible={navIdx === 1} />
-            <Pricing visible={navIdx === 2} />
-            <ContactUs visible={navIdx === 4} />
             <Login visible={navIdx === 5} />
             <Signup visible={navIdx === 6} />
             <ForgetPasswordContainer visible={navIdx === 7} />

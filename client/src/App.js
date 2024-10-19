@@ -32,12 +32,11 @@ function App() {
             <CurrentViewContext.Provider value={viewValue}>
               <Routes>
                 <Route path="/" element={
-                  <>
-                    <CourseContextProvider>
-                      {view === 'guest' ? <GuestPage /> : <UserPage />}
-                      <CoursePage />
-                    </CourseContextProvider>
-                  </>
+                  <CourseContextProvider>
+                    {view === 'guest' ? <GuestPage /> : <UserPage />}
+                    {/* Conditionally render CoursePage only for logged-in users */}
+                    {view === 'user' && <CoursePage />}
+                  </CourseContextProvider>
                 } />
               </Routes>
             </CurrentViewContext.Provider>
