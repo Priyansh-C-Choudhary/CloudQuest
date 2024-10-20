@@ -1,5 +1,4 @@
 import LandingPage from "../components/landing/LandingPage";
-import ContactUs from '../components/contactus/ContactUs';
 import Features from '../components/landing/Features';
 import { useContext } from 'react';
 import NavStateContext from '../context/NavStateContext';
@@ -19,7 +18,6 @@ const UserPage = () => {
                 <Features visible={navIdx === 0} />     {/* Features should appear for Home */}
                 {/* Display Homepage only when navIdx corresponds to Categories */}
                 {navIdx === 1 && <Homepage visible={true} />} 
-                <ContactUs visible={navIdx === 4} />
                 <AccountInfo visible={navIdx === 8} />
             </LoggedInLayout>
         )

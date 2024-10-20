@@ -119,9 +119,9 @@ const SignupForm = () => {
                 <div className="flex relative">
                     <select name="country" className="flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-800 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" onChange={e => handleCountryChange(e)} >
                         <option disabled selected>Select Country</option>
-                        <option value="Afghanistan">Afghanistan</option>
-                        <option value="Zambia">Zambia</option>
-                        <option value="Zimbabwe">Zimbabwe</option>
+                        <option value="India">India</option>
+                        <option value="America">America</option>
+                        <option value="Japan">Japan</option>
                     </select>
                 </div>
             </div>

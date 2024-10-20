@@ -1,6 +1,6 @@
 import React from 'react';
-import '../styles/DevOpsTable.css';
-import data from '../data/DevOpsTableData.json';
+import '../../styles/DevOpsTable.css';
+import data from '../../data/DevOpsTableData.json';
 
 const devopscolorMap = {
     "Source Control Management": "#812E58",

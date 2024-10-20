@@ -15,7 +15,7 @@ const MainNavList = () => {
             />
             <MainNavListSeparator />
             <MainNavListItem
-                text={"Courses"}
+                text={"Learn"}
                 href="#"
                 myIdx={1}
             />

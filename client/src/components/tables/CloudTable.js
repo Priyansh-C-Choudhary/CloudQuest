@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/CloudTable.css';
+import '../../styles/CloudTable.css';
 
 const data = [
   { name: 'aws', label: 'AWS', percentage: 31, color: 'bg-orange-500', logo: 'https://placehold.co/30x30?text=AWS', link: 'https://aws.amazon.com' },
