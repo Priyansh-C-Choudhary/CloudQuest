@@ -1,6 +1,6 @@
 const express = require('express');
 const { requireSignin, addVideoNote, editInfo, issueProblem } = require('../middlewares');
-const { viewMyCourses, signup, signin } = require('../controller/guest');
+const { viewMyCourses, signup, signin } = require('../controllers/guest');
 const router = express.Router();
 
 // POST routes for guest

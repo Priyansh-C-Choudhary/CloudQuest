@@ -18,11 +18,7 @@ app.listen(port, () => console.log(`Server running on port ${port}`));
 
 // MongoDB & Mongoose connection using URL from .env file
 mongoose.connect(
-    process.env.MONGO_DB_URL,  // Using the URL from .env file
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    }
+    process.env.MONGO_URI,  //Using the URL from .env file
 ).then(() => {
     console.log(`Database connected`);
 }).catch((error) => {
