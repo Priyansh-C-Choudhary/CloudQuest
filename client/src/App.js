@@ -2,18 +2,19 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import CoursePage from './pages/CoursePage';
 import GuestPage from './pages/GuestPage';
 import UserPage from './pages/UserPage';
+import Homepage from './components/homepage/Homepage'; // Import the Homepage component
 import { useState } from 'react';
 import React from 'react';
-import NavStateContext from './context/NavStateContext'; // Retained in case you use it for navigation state within UserPage or GuestPage
+import NavStateContext from './context/NavStateContext'; 
 import CurrentViewContext from './context/CurrentViewContext';
 import UserInfoContext from './context/UserInfoContext';
-import CourseContextProvider from './context/CourseContext'; // Provides course-related state
+import CourseContextProvider from './context/CourseContext'; 
 
 import { useCookies } from "react-cookie";
 
 function App() {
   const [cookies] = useCookies(['userCookie']);
-  const [navIdx, setNavIdx] = useState(0); // Kept in case navigation state is needed
+  const [navIdx, setNavIdx] = useState(0);
   const navIdxValue = { navIdx, setNavIdx };
 
   // Determine if the user is a guest or logged-in user
@@ -31,13 +32,16 @@ function App() {
           <NavStateContext.Provider value={navIdxValue}>
             <CurrentViewContext.Provider value={viewValue}>
               <Routes>
+                {/* Route for the main homepage */}
                 <Route path="/" element={
                   <CourseContextProvider>
                     {view === 'guest' ? <GuestPage /> : <UserPage />}
-                    {/* Conditionally render CoursePage only for logged-in users */}
                     {view === 'user' && <CoursePage />}
                   </CourseContextProvider>
                 } />
+
+                {/* Route for Courses (Homepage component) */}
+                <Route path="/courses" element={<Homepage />} />
               </Routes>
             </CurrentViewContext.Provider>
           </NavStateContext.Provider>

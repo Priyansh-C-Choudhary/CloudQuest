@@ -14,7 +14,7 @@ const NavBarLogo = () => {
             else
                 setView('user')
         }}>
-            <div className='bg-black text-white px-2 py-1'>ACL.</div>
+            <div className='bg-black text-white px-2 py-1'>CloudQuest</div>
         </div>
 
     )
