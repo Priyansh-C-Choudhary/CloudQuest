@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCloud, faHome } from "@fortawesome/free-solid-svg-icons"; // Importing cloud and home icons
+import { faHome } from "@fortawesome/free-solid-svg-icons"; // Importing cloud and home icons
 import { useNavigate } from "react-router-dom"; // For navigation
 
 // Infinity path animation for DevOps button
