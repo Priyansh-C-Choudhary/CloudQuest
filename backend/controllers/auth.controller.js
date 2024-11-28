@@ -11,50 +11,48 @@ import {
 import { User } from "../models/user.model.js";
 
 export const signup = async (req, res) => {
-	const { email, password, name } = req.body;
-
+	const { email, password, name, role } = req.body; // Accept role
+  
 	try {
-		if (!email || !password || !name) {
-			throw new Error("All fields are required");
-		}
-
-		const userAlreadyExists = await User.findOne({ email });
-		console.log("userAlreadyExists", userAlreadyExists);
-
-		if (userAlreadyExists) {
-			return res.status(400).json({ success: false, message: "User already exists" });
-		}
-
-		const hashedPassword = await bcryptjs.hash(password, 10);
-		const verificationToken = Math.floor(100000 + Math.random() * 900000).toString();
-
-		const user = new User({
-			email,
-			password: hashedPassword,
-			name,
-			verificationToken,
-			verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000, // 24 hours
-		});
-
-		await user.save();
-
-		// jwt
-		generateTokenAndSetCookie(res, user._id);
-
-		await sendVerificationEmail(user.email, verificationToken);
-
-		res.status(201).json({
-			success: true,
-			message: "User created successfully",
-			user: {
-				...user._doc,
-				password: undefined,
-			},
-		});
+	  if (!email || !password || !name) {
+		throw new Error("All fields are required");
+	  }
+  
+	  const userAlreadyExists = await User.findOne({ email });
+	  if (userAlreadyExists) {
+		return res.status(400).json({ success: false, message: "User already exists" });
+	  }
+  
+	  const hashedPassword = await bcryptjs.hash(password, 10);
+	  const verificationToken = Math.floor(100000 + Math.random() * 900000).toString();
+  
+	  const user = new User({
+		email,
+		password: hashedPassword,
+		name,
+		role: role || 'user', // Default to 'user' if no role is provided
+		verificationToken,
+		verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000, // 24 hours
+	  });
+  
+	  await user.save();
+  
+	  generateTokenAndSetCookie(res, user._id);
+  
+	  await sendVerificationEmail(user.email, verificationToken);
+  
+	  res.status(201).json({
+		success: true,
+		message: "User created successfully",
+		user: {
+		  ...user._doc,
+		  password: undefined, // Don't expose password
+		},
+	  });
 	} catch (error) {
-		res.status(400).json({ success: false, message: error.message });
+	  res.status(400).json({ success: false, message: error.message });
 	}
-};
+  };
 
 export const verifyEmail = async (req, res) => {
 	const { code } = req.body;
@@ -91,38 +89,36 @@ export const verifyEmail = async (req, res) => {
 
 export const login = async (req, res) => {
 	const { email, password } = req.body;
-	
-	
+  
 	try {
-		const user = await User.findOne({ email });
-		if (!user) {
-			return res.status(400).json({ success: false, message: "Invalid credentials" });
-		}
-		
-		
-		const isPasswordValid = await bcryptjs.compare(password, user.password);
-		if (!isPasswordValid) {
-			return res.status(400).json({ success: false, message: "Invalid credentials" });
-		}
-		generateTokenAndSetCookie(res, user._id);
-		
-
-		user.lastLogin = new Date();
-		await user.save();
-
-		res.status(200).json({
-			success: true,
-			message: "Logged in successfully",
-			user: {
-				...user._doc,
-				password: undefined,
-			},
-		});
+	  const user = await User.findOne({ email });
+	  if (!user) {
+		return res.status(400).json({ success: false, message: "Invalid credentials" });
+	  }
+  
+	  const isPasswordValid = await bcryptjs.compare(password, user.password);
+	  if (!isPasswordValid) {
+		return res.status(400).json({ success: false, message: "Invalid credentials" });
+	  }
+  
+	  generateTokenAndSetCookie(res, user._id);
+  
+	  user.lastLogin = new Date();
+	  await user.save();
+  
+	  res.status(200).json({
+		success: true,
+		message: "Logged in successfully",
+		user: {
+		  ...user._doc,
+		  password: undefined, // Exclude the password
+		},
+	  });
 	} catch (error) {
-		console.log("Error in login ", error);
-		res.status(400).json({ success: false, message: error.message });
+	  console.log("Error in login ", error);
+	  res.status(400).json({ success: false, message: error.message });
 	}
-};
+  };
 
 export const logout = async (req, res) => {
 	res.clearCookie("token");
@@ -190,14 +186,18 @@ export const resetPassword = async (req, res) => {
 
 export const checkAuth = async (req, res) => {
 	try {
-		const user = await User.findById(req.userId).select("-password");
-		if (!user) {
-			return res.status(400).json({ success: false, message: "User not found" });
-		}
-
-		res.status(200).json({ success: true, user });
+	  const user = await User.findById(req.userId).select("-password"); // Exclude the password
+	  if (!user) {
+		return res.status(400).json({ success: false, message: "User not found" });
+	  }
+  
+	  res.status(200).json({
+		success: true,
+		user, // This will include the `role` field
+	  });
 	} catch (error) {
-		console.log("Error in checkAuth ", error);
-		res.status(400).json({ success: false, message: error.message });
+	  console.log("Error in checkAuth ", error);
+	  res.status(400).json({ success: false, message: error.message });
 	}
-};
+  };
+  
