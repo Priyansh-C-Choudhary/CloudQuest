@@ -10,6 +10,7 @@ const SignUpPage = () => {
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [isCollaborator, setIsCollaborator] = useState(false); // New state for collaborator checkbox
 	const navigate = useNavigate();
 
 	const { signup, error, isLoading } = useAuthStore();
@@ -18,12 +19,13 @@ const SignUpPage = () => {
 		e.preventDefault();
 
 		try {
-			await signup(email, password, name);
+			await signup(email, password, name, isCollaborator ? "collaborator" : "user");
 			navigate("/verify-email");
 		} catch (error) {
 			console.log(error);
 		}
 	};
+
 	return (
 		<motion.div
 			initial={{ opacity: 0, y: 20 }}
@@ -62,6 +64,18 @@ const SignUpPage = () => {
 					{error && <p className='text-red-500 font-semibold mt-2'>{error}</p>}
 					<PasswordStrengthMeter password={password} />
 
+					<div className='flex items-center mb-4 mt-4'>
+					<input
+						type='checkbox'
+						checked={isCollaborator}
+						onChange={(e) => setIsCollaborator(e.target.checked)}
+						className='w-4 h-4 appearance-none bg-[#1E2D2F] rounded focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900 checked:bg-green-500'
+					/>
+						<span className='ml-2 text-sm font-semibold bg-gradient-to-r from-green-400 to-emerald-500 text-transparent bg-clip-text'>
+							Sign up as Collaborator
+						</span>
+					</div>
+
 					<motion.button
 						className='mt-5 w-full py-3 px-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white 
 						font-bold rounded-lg shadow-lg hover:from-green-600
@@ -72,7 +86,7 @@ const SignUpPage = () => {
 						type='submit'
 						disabled={isLoading}
 					>
-						{isLoading ? <Loader className=' animate-spin mx-auto' size={24} /> : "Sign Up"}
+						{isLoading ? <Loader className='animate-spin mx-auto' size={24} /> : "Sign Up"}
 					</motion.button>
 				</form>
 			</div>
@@ -87,4 +101,5 @@ const SignUpPage = () => {
 		</motion.div>
 	);
 };
+
 export default SignUpPage;
