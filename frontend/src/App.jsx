@@ -10,8 +10,9 @@ import InformationPage from "./pages/InformationPage";
 import LearningPage from "./pages/LearningPage";
 import BlankPage from "./pages/BlankPage";
 import CloudPage from "./pages/CloudPage"
+import CollaboratorPage from "./pages/CollaboratorPage";
 
-
+import RoleProtectedRoute from "./components/RoleProtectedRoute";
 import LoadingSpinner from "./components/LoadingSpinner";
 
 import { Toaster } from "react-hot-toast";
@@ -72,6 +73,14 @@ function App() {
 						<ProtectedRoute>
 							<DashboardPage />
 						</ProtectedRoute>
+					}
+				/>
+				<Route
+					path="/collaborator"
+					element={
+						<RoleProtectedRoute allowedRoles={['collaborator']}>
+							<CollaboratorPage />
+						</RoleProtectedRoute>
 					}
 				/>
 				<Route
