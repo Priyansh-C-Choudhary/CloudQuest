@@ -11,6 +11,9 @@ import LearningPage from "./pages/LearningPage";
 import BlankPage from "./pages/BlankPage";
 import CloudPage from "./pages/CloudPage"
 import CollaboratorPage from "./pages/CollaboratorPage";
+import DevOpsTable from "./pages/DevOpsPage";
+import TerraformRoadmap from "./pages/DevOpsTools/TerraformRoadmap";
+import DockerRoadmap from "./pages/DevOpsTools/DockerRoadmap";
 
 import RoleProtectedRoute from "./components/RoleProtectedRoute";
 import LoadingSpinner from "./components/LoadingSpinner";
@@ -18,7 +21,7 @@ import LoadingSpinner from "./components/LoadingSpinner";
 import { Toaster } from "react-hot-toast";
 import { useAuthStore } from "./store/authStore";
 import { useEffect } from "react";
-import DevOpsTable from "./pages/DevOpsPage";
+
 
 
 
@@ -153,6 +156,24 @@ function App() {
 						</ProtectedRoute>
 					}
 				/>
+				<Route
+					path='/terraform-roadmap'
+					element={
+						<ProtectedRoute>
+							<TerraformRoadmap />
+						</ProtectedRoute>
+					}
+				/>
+				<Route
+					path='/docker-roadmap'
+					element={
+						<ProtectedRoute>
+							<DockerRoadmap />
+						</ProtectedRoute>
+					}
+				/>
+				
+				/terraform-roadmap
 				{/* catch all routes */}
 				<Route path='*' element={<Navigate to='/' replace />} />
 			</Routes>
