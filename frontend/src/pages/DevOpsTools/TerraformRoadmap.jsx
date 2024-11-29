@@ -1,4 +1,5 @@
 import React from "react";
+import terraformImage from "../../assets/images/DevOpsTool/terraform.jpg";
 
 const TerraformRoadmap = () => {
   return (
@@ -6,15 +7,19 @@ const TerraformRoadmap = () => {
       {/* Page Header */}
       <header className="mb-12 text-center">
         <h1 className="text-4xl font-bold mb-2">Terraform Roadmap</h1>
-        <p className="text-lg text-gray-400">Your comprehensive guide to learning and mastering Terraform.</p>
+        <p className="text-lg text-gray-400">
+          Your comprehensive guide to learning and mastering Terraform.
+        </p>
       </header>
 
       {/* Summary Section */}
       <section className="mb-10">
         <h2 className="text-2xl font-semibold mb-4">Summary</h2>
         <p className="text-gray-300">
-          Terraform is an open-source Infrastructure as Code (IaC) tool that enables users to define and provision
-          infrastructure resources in human-readable configuration files. It is widely used for automating cloud and on-premises deployments.
+          Terraform is an open-source Infrastructure as Code (IaC) tool that
+          enables users to define and provision infrastructure resources in
+          human-readable configuration files. It is widely used for automating
+          cloud and on-premises deployments.
         </p>
       </section>
 
@@ -44,7 +49,8 @@ const TerraformRoadmap = () => {
       <section className="mb-10">
         <h2 className="text-2xl font-semibold mb-4">Real-World Case Studies</h2>
         <p className="text-gray-300 mb-4">
-          Explore how organizations are using Terraform to streamline their infrastructure management:
+          Explore how organizations are using Terraform to streamline their
+          infrastructure management:
         </p>
         <ul className="list-disc ml-6 text-gray-300">
           <li>
@@ -74,7 +80,7 @@ const TerraformRoadmap = () => {
       <section className="mb-10">
         <h2 className="text-2xl font-semibold mb-4">Sample Code Snippets</h2>
         <pre className="bg-gray-800 text-green-400 p-4 rounded-lg">
-{`provider "aws" {
+          {`provider "aws" {
   region = "us-west-2"
 }
 
@@ -89,13 +95,13 @@ resource "aws_instance" "example" {
         <section className="mb-10">
         <h2 className="text-2xl font-semibold mb-4">Roadmap</h2>
         <p className="text-gray-300 mb-4">
-            Follow this roadmap to master Terraform. You can add a visual roadmap or steps here.
+            Follow this roadmap to master Terraform. Here is a visual roadmap to guide you.
         </p>
-        <div className="w-full h-40 bg-gray-800 flex items-center justify-center rounded-lg">
+        <div className="w-full bg-gray-800 flex items-center justify-center rounded-lg overflow-auto">
             <img
-            src="/path-to-your-image/roadmap.jpg" // Replace with the correct path to your image
+            src={terraformImage}
             alt="Terraform Roadmap"
-            className="rounded-lg object-cover w-full h-full"
+            className="rounded-lg object-contain w-[1200px] h-auto"
             />
         </div>
         </section>
