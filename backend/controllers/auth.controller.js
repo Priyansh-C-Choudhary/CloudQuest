@@ -1,5 +1,6 @@
 import bcryptjs from "bcryptjs";
 import crypto from "crypto";
+import jwt from "jsonwebtoken";
 
 import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.js";
 import {
@@ -91,34 +92,51 @@ export const login = async (req, res) => {
 	const { email, password } = req.body;
   
 	try {
-	  const user = await User.findOne({ email });
-	  if (!user) {
-		return res.status(400).json({ success: false, message: "Invalid credentials" });
-	  }
+		// Find the user in the database by email
+		const user = await User.findOne({ email });
+		if (!user) {
+			return res.status(400).json({ success: false, message: "Invalid credentials" });
+		}
   
-	  const isPasswordValid = await bcryptjs.compare(password, user.password);
-	  if (!isPasswordValid) {
-		return res.status(400).json({ success: false, message: "Invalid credentials" });
-	  }
+		// Validate the provided password
+		const isPasswordValid = await bcryptjs.compare(password, user.password);
+		if (!isPasswordValid) {
+			return res.status(400).json({ success: false, message: "Invalid credentials" });
+		}
+
+		// Generate the token
+		const token = jwt.sign({ userId: user._id, role: user.role }, process.env.JWT_SECRET, {
+			expiresIn: "7d", // Token expiration: 7 days
+		});
   
-	  generateTokenAndSetCookie(res, user._id);
+		// Optionally: Set the token as an HTTP-only cookie for better security
+		res.cookie("token", token, {
+			httpOnly: true,
+			secure: process.env.NODE_ENV === "production",
+			sameSite: "strict",
+			maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+		});
+
+		// Update user's last login time
+		user.lastLogin = new Date();
+		await user.save();
   
-	  user.lastLogin = new Date();
-	  await user.save();
-  
-	  res.status(200).json({
-		success: true,
-		message: "Logged in successfully",
-		user: {
-		  ...user._doc,
-		  password: undefined, // Exclude the password
-		},
-	  });
+		// Return user data and the token in the response
+		res.status(200).json({
+			success: true,
+			message: "Logged in successfully",
+			token, // Include token in response body
+			user: {
+				...user._doc,
+				password: undefined, // Do not expose the password
+			},
+		});
 	} catch (error) {
-	  console.log("Error in login ", error);
-	  res.status(400).json({ success: false, message: error.message });
+		console.log("Error in login ", error);
+		res.status(400).json({ success: false, message: error.message });
 	}
-  };
+};
+
 
 export const logout = async (req, res) => {
 	res.clearCookie("token");

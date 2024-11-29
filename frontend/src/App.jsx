@@ -11,6 +11,7 @@ import LearningPage from "./pages/LearningPage";
 import BlankPage from "./pages/BlankPage";
 import CloudPage from "./pages/CloudPage"
 import CollaboratorPage from "./pages/CollaboratorPage";
+import RoadmapPage from "./pages/RoadmapPage";
 
 import RoleProtectedRoute from "./components/RoleProtectedRoute";
 import LoadingSpinner from "./components/LoadingSpinner";
@@ -150,6 +151,14 @@ function App() {
 					element={
 						<ProtectedRoute>
 							<CloudPage />
+						</ProtectedRoute>
+					}
+				/>
+				<Route
+					path="/roadmap/:tool"
+					element={
+						<ProtectedRoute>
+							<RoadmapPage />
 						</ProtectedRoute>
 					}
 				/>
