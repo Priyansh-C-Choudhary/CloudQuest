@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  frontend:
+    image: <your_ecr_repository_uri>/frontend:latest
+    ports:
+      - "80:80"
+  backend:
+    image: <your_ecr_repository_uri>/backend:latest
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb+srv://customer-service:IZADeiXJCi8RFrG4@customer-service-db.qgarx.mongodb.net/
+      - JWT_SECRET=8191b23e5620ff667af0439f75d55452a823fecc45461c3ae424e409a509da04
+      - MAILTRAP_TOKEN=e8c2b73f9f187d7f4c2d62cbc9d4afbe
+      - MAILTRAP_ENDPOINT=https://send.api.mailtrap.io/
+      - CLIENT_URL=<your_domain_or_public_ip>:5173
