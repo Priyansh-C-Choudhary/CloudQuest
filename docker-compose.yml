@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      NODE_ENV: production
+      PORT: 5000
+      JWT_SECRET: 8191b23e5620ff667af0439f75d55452a823fecc45461c3ae424e409a509da04
+      MONGO_URI: mongodb+srv://customer-service:IZADeiXJCi8RFrG4@customer-service-db.qgarx.mongodb.net/
+      MAILTRAP_TOKEN: e8c2b73f9f187d7f4c2d62cbc9d4afbe
+      MAILTRAP_ENDPOINT: https://send.api.mailtrap.io/
+      FRONTEND_URL: http://localhost
+    networks:
+      - app-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    ports:
+      - "80:80"
+    networks:
+      - app-network
+
+networks:
+  app-network:
