@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata: 
   name: frontend
-  namespace: three-tier
+  namespace: CloudQuest  # Fixed namespace to match other frontend resources
 spec:
   ports:
   - port: 80 # Expose on port 80 for the Ingress

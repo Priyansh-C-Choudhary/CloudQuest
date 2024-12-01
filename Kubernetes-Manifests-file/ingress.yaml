@@ -2,20 +2,20 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: mainlb
-  namespace: three-tier
+  namespace: CloudQuest # Fixed namespace
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
     alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}]'
-    # alb.ingress.kubernetes.io/subnets: "subnet-0aa439b4ddafcca10,subnet-0b95df318219145ca,subnet-0ccca36474902829a"
+    # alb.ingress.kubernetes.io/subnets: "subnet-xxxxxxxxxxxxxxxxx,subnet-yyyyyyyyyyyyyyyyy,subnet-zzzzzzzzzzzzzzzzz"  # Uncomment and provide correct subnet IDs if needed
 spec:
-  ingressClassName: alb
+  ingressClassName: alb # Make sure this ingress class name matches the one you installed
   rules:
-  - host: major1cloudquest.cloud # Replace with your domain
+  - host: major1cloudquest.cloud # Your production domain
     http:
       paths:
-      - path: /api/ # Route /api/* requests to the backend
-        pathType: Prefix 
+      - path: /api/auth/ # Route requests to backend auth routes
+        pathType: Prefix
         backend:
           service:
             name: api
@@ -27,4 +27,4 @@ spec:
           service:
             name: frontend
             port:
-              number: 80 # The frontend service exposes on 80
+              number: 80
