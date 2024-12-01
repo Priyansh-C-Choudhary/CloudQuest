@@ -14,6 +14,7 @@ import CollaboratorPage from "./pages/CollaboratorPage";
 import DevOpsTable from "./pages/DevOpsPage";
 import TerraformRoadmap from "./pages/DevOpsTools/TerraformRoadmap";
 import DockerRoadmap from "./pages/DevOpsTools/DockerRoadmap";
+import KubernetesRoadmap from "./pages/DevOpsTools/KubernetesRoadmap";
 
 import RoleProtectedRoute from "./components/RoleProtectedRoute";
 import LoadingSpinner from "./components/LoadingSpinner";
@@ -172,8 +173,14 @@ function App() {
 						</ProtectedRoute>
 					}
 				/>
-				
-				/terraform-roadmap
+				<Route
+					path='/kubernetes-roadmap'
+					element={
+						<ProtectedRoute>
+							<KubernetesRoadmap />
+						</ProtectedRoute>
+					}
+				/>
 				{/* catch all routes */}
 				<Route path='*' element={<Navigate to='/' replace />} />
 			</Routes>
