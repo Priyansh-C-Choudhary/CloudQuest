@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: api
-  namespace: three-tier
+  namespace: CloudQuest
   labels:
     role: api
     env: demo
@@ -29,36 +29,26 @@ spec:
         imagePullPolicy: Always
         env:
           - name: MONGO_CONN_STR
-            value: mongodb://mongodb-svc:27017/todo?directConnection=true
-          - name: MONGO_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: mongo-sec
-                key: username
-          - name: MONGO_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: mongo-sec
-                key: password
+            value: mongodb+srv://customer-service:IZADeiXJCi8RFrG4@customer-service-db.qgarx.mongodb.net/
         ports:
-        - containerPort: 3500
+        - containerPort: 5000
         livenessProbe:
           httpGet:
             path: /healthz
-            port: 3500
+            port: 5000
           initialDelaySeconds: 2
           periodSeconds: 5
         readinessProbe:
           httpGet:
             path: /ready
-            port: 3500
+            port: 5000
           initialDelaySeconds: 5
           periodSeconds: 5
           successThreshold: 1
         startupProbe:
           httpGet:
             path: /started
-            port: 3500
+            port: 5000
           initialDelaySeconds: 0
           periodSeconds: 10
           failureThreshold: 30
