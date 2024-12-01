@@ -31,4 +31,4 @@ spec:
           - name: REACT_APP_BACKEND_URL
             value: "https://major1cloudquest.cloud/api/auth"
         ports:
-        - containerPort: 3000
+        - containerPort: 5173

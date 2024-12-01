@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: api
-  namespace: CloudQuest
+  namespace: CloudQuest # Your namespace
   labels:
     role: api
     env: demo
@@ -21,34 +21,65 @@ spec:
       labels:
         role: api
     spec:
-      imagePullSecrets:
-      - name: ecr-registry-secret
-      containers:
-      - name: api
-        image: 407622020962.dkr.ecr.us-east-1.amazonaws.com/backend:1
-        imagePullPolicy: Always
-        env:
-          - name: MONGO_CONN_STR
-            value: mongodb+srv://customer-service:IZADeiXJCi8RFrG4@customer-service-db.qgarx.mongodb.net/
-        ports:
-        - containerPort: 5000
-        livenessProbe:
-          httpGet:
-            path: /healthz
-            port: 5000
-          initialDelaySeconds: 2
-          periodSeconds: 5
-        readinessProbe:
-          httpGet:
-            path: /ready
-            port: 5000
-          initialDelaySeconds: 5
-          periodSeconds: 5
-          successThreshold: 1
-        startupProbe:
-          httpGet:
-            path: /started
-            port: 5000
-          initialDelaySeconds: 0
-          periodSeconds: 10
-          failureThreshold: 30
+      containers: # Removed imagePullSecrets: no longer needed if not using private registry
+        - name: api
+          image: 407622020962.dkr.ecr.us-east-1.amazonaws.com/backend:latest # Replace with your image
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          env:
+            - name: MONGO_URI
+              valueFrom:
+                secretKeyRef:
+                  name: secrets # Updated to your secret name
+                  key: MONGO_URI
+            - name: PORT
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: PORT
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: JWT_SECRET
+            - name: NODE_ENV
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: NODE_ENV
+            - name: MAILTRAP_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: MAILTRAP_TOKEN
+            - name: MAILTRAP_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: MAILTRAP_ENDPOINT
+            - name: CLIENT_URL
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: CLIENT_URL          
+          livenessProbe: # Keep your probes as they are helpful
+            httpGet:
+              path: /healthz
+              port: 5000  # Updated port
+            initialDelaySeconds: 2
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 5000 # Updated port
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+          startupProbe:
+            httpGet:
+              path: /started
+              port: 5000 # Updated port
+            initialDelaySeconds: 0
+            periodSeconds: 10
+            failureThreshold: 30

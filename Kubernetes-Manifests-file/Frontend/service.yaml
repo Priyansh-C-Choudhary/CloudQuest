@@ -5,7 +5,8 @@ metadata:
   namespace: three-tier
 spec:
   ports:
-  - port: 3000
+  - port: 80 # Expose on port 80 for the Ingress
+    targetPort: 5173 # The port your React app runs on inside the container
     protocol: TCP
   type: ClusterIP
   selector:
