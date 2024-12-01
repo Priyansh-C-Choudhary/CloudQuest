@@ -48,14 +48,20 @@ const categoryLegend = [
 ];
 
 const DevOpsTable = () => {
-    const navigate = useNavigate(); // Initialize navigate for back navigation
+    const navigate = useNavigate();
 
     const handleBack = () => {
         navigate(-1); // Go back to the previous page
     };
 
+    // Function to navigate based on the tool name
+    const navigateToTool = (toolName) => {
+        const toolPath = toolName.toLowerCase().replace(/\s+/g, '-'); // Convert the tool name to a URL-friendly path
+        navigate(`/${toolPath}-roadmap`); // Navigate to the tool's detail page dynamically with '-roadmap'
+    };
+
     return (
-        <div className="relative min-h-screen"> {/* Full-screen container */}
+        <div className="relative min-h-screen">
             {/* Back button in the top left */}
             <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -78,7 +84,7 @@ const DevOpsTable = () => {
                     Periodic Table of <span className="bg-gradient-to-r from-purple-500 to-indigo-500 text-transparent bg-clip-text">DevOps Tools</span>
                 </h1>
 
-                {/* Pricing Symbol Legend (Vertically Aligned) */}
+                {/* Pricing Symbol Legend */}
                 <div className="absolute top-[130px] left-[150px] flex flex-col justify-center space-y-2 mb-8">
                     {pricingLegend.map((item, index) => (
                         <div key={index} className="flex items-center space-x-2">
@@ -90,7 +96,7 @@ const DevOpsTable = () => {
                     ))}
                 </div>
 
-                {/* Color Category Legend (Vertically Aligned, Three Columns) */}
+                {/* Color Category Legend */}
                 <div className="absolute top-[130px] left-[300px] grid grid-cols-3 gap-x-8 gap-y-2 mb-8">
                     {categoryLegend.map((item, index) => (
                         <div key={index} className="flex items-center space-x-2">
@@ -122,6 +128,7 @@ const DevOpsTable = () => {
                                 borderWidth: "1px",
                                 position: "relative",
                             }}
+                            onClick={() => navigateToTool(element.name)} // Add click event to navigate to tool roadmap
                         >
                             <strong className="text-sm font-bold truncate">{element.symbol}</strong>
                             <small className="absolute top-1 left-1 text-xs">{element.number}</small>
