@@ -34,7 +34,7 @@ export const sendWelcomeEmail = async (email = defaultRecipient.email, name) => 
 			to: recipient,
 			template_uuid: "e65925d1-a9d1-4a40-ae7c-d92b37d593df",
 			template_variables: {
-				company_info_name: "Auth Company",
+				company_info_name: "CloudQuest",
 				name: name,
 			},
 		});
